@@ -1,114 +1,14 @@
 {
-    "gen": {
-        "value": "59",
-        "quantity": 66
+    "Wood": {
+        "value": "597",
+        "quantity": 50
     },
-    "xxdws": {
-        "value": "0",
-        "quantity": 90
+    "Inapur": {
+        "value": "980",
+        "quantity": 3
     },
-    "123": {
-        "value": "0",
-        "quantity": 3213
-    },
-    "12321": {
-        "value": "0",
-        "quantity": 123
-    },
-    "1231": {
-        "value": "0",
-        "quantity": 21312311
-    },
-    "123213": {
-        "value": "0",
-        "quantity": 2131123
-    },
-    "we": {
-        "value": "0",
-        "quantity": 1233
-    },
-    "dskjl": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjli": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlp1": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjll2": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjla4": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlw3": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlp5": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjll5": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjla6": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlw7": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlp7": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjll9": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjla9": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlw9": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlp0": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjll": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjla": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "dskjlw": {
-        "value": "0",
-        "quantity": 6565
-    },
-    "tininiw": {
-        "value": "0",
-        "quantity": 545
-    },
-    "asda": {
-        "value": "0",
-        "quantity": 55
-    },
-    "asdaa": {
-        "value": "0",
-        "quantity": 888
+    "Aqua Flask": {
+        "value": "599",
+        "quantity": 10
     }
 }

@@ -70,35 +70,58 @@ def update_product_display():
         product_item.pack(fill="x", pady=10, padx=10)
 
         # Configure grid
-        product_item.columnconfigure(0, weight=1)
-        product_item.columnconfigure(1, weight=0)
+        product_item.columnconfigure(0, weight=1)  # Name
+        product_item.columnconfigure(1, weight=0)  # Value
+        product_item.columnconfigure(2, weight=0)  # Buttons
 
         # Product name/value
-        details = ctk.CTkLabel(product_item, text=f"{name} | Value: {data['value']}", anchor="w",
-                               text_color="#000000", font=font_settings)
-        details.grid(row=0, column=0, padx=(20, 0), pady=20, sticky="w")
+        name_label = ctk.CTkLabel(
+            product_item,
+            text=f"{name}",
+            anchor="w",
+            text_color="#000000",
+            font=font_settings
+        )
+        name_label.grid(row=0, column=0, padx=(150, 10), pady=20, sticky="w")
 
-        # Buttons frame
+        # Value label
+        value_label = ctk.CTkLabel(
+            product_item,
+            text=f"Value: {data['value']}",
+            anchor="e",
+            text_color="#000000",
+            font=font_settings
+        )
+        value_label.grid(row=0, column=1, padx=(10, 1000), pady=20, sticky="e")
+
+
         btn_frame = ctk.CTkFrame(product_item, fg_color="#FFFFFF")
-        btn_frame.grid(row=0, column=1, padx=0, pady=10, sticky="e")
+        btn_frame.grid(row=0, column=2, padx=90, pady=10, sticky="e")
 
-        add_button = ctk.CTkButton(btn_frame, text="+", width=60, height=60,
+        add_button = ctk.CTkButton(btn_frame, text="+", width=50, height=50,
                                    command=lambda n=name: update_quantity(n, 1),
                                    fg_color="#000000", text_color="#FFFFFF", font=font_settings)
-        add_button.pack(side="left", padx=5)
+        add_button.pack(side="left", padx=10)
 
-        quantity_label = ctk.CTkLabel(btn_frame, text=f"{data['quantity']}", text_color="#000000", font=font_settings)
+        quantity_label = ctk.CTkLabel(
+            btn_frame,
+            text=f"{data['quantity']}",
+            text_color="#000000",
+            font=font_settings,
+            width=50,  # Fix width to prevent shifting (adjust as needed)
+            anchor="center"  # Center the number text inside
+        )
         quantity_label.pack(side="left", padx=5)
 
-        minus_button = ctk.CTkButton(btn_frame, text="-", width=60, height=60,
+        minus_button = ctk.CTkButton(btn_frame, text="-", width=50, height=50,
                                      command=lambda n=name: update_quantity(n, -1),
                                      fg_color="#000000", text_color="#FFFFFF", font=font_settings)
-        minus_button.pack(side="left", padx=5)
+        minus_button.pack(side="left", padx=10)
 
-        delete_btn = ctk.CTkButton(btn_frame, text="Delete", width=100, height=60,
+        delete_btn = ctk.CTkButton(btn_frame, text="Delete", width=80, height=40,
                                    command=lambda n=name: delete_product(n),
                                    fg_color="#FF0000", text_color="#FFFFFF", font=font_settings)
-        delete_btn.pack(side="left", padx=5)
+        delete_btn.pack(side="left", padx=25)
 
 def on_mouse_wheel(event):
     canvas.yview_scroll(int(-1*(event.delta/120)), "units")
@@ -123,28 +146,38 @@ app.title("Inventory System")
 app.attributes("-fullscreen", True)
 app.configure(fg_color="#FFFFFF")
 
-font_settings = ("Arial", 30)
+font_settings = ("Arial", 24)
 
 # Exit Button
-exit_button = ctk.CTkButton(app, text="X", width=60, height=60, command=confirm_exit,
-                            fg_color="#000000", text_color="#FFFFFF", font=("Arial", 30, "bold"))
-exit_button.place(relx=0.98, rely=0.02, anchor="ne")
+exit_button = ctk.CTkButton(
+    app,
+    text="x",
+    width=40,
+    height=30,
+    command=confirm_exit,
+    fg_color="#ffffff",  # Button color
+    text_color="#000000",
+    hover_color="#ffffff",  # Same as fg_color, no hover effect
+    font=("Arial", 30)
+)
+exit_button.place(relx=0.99, rely=0.01, anchor="ne")
+
 
 # Add Product Section
 add_frame = ctk.CTkFrame(app, fg_color="#FFFFFF")
 add_frame.pack(pady=20)
 
-entry_name = ctk.CTkEntry(add_frame, placeholder_text="Product Name", width=250, height=60, font=font_settings)
+entry_name = ctk.CTkEntry(add_frame, placeholder_text="Product Name", width=250, height=50, font=font_settings)
 entry_name.grid(row=0, column=0, padx=10)
 
-entry_value = ctk.CTkEntry(add_frame, placeholder_text="Value (Optional)", width=250, height=60, font=font_settings)
+entry_value = ctk.CTkEntry(add_frame, placeholder_text="Value (Optional)", width=250, height=50, font=font_settings)
 entry_value.grid(row=0, column=1, padx=10)
 
-entry_quantity = ctk.CTkEntry(add_frame, placeholder_text="Quantity", width=250, height=60, font=font_settings)
+entry_quantity = ctk.CTkEntry(add_frame, placeholder_text="Quantity", width=250, height=50, font=font_settings)
 entry_quantity.grid(row=0, column=2, padx=10)
 
 add_btn = ctk.CTkButton(add_frame, text="Add Product", command=add_product, fg_color="#000000",
-                        text_color="#FFFFFF", width=200, height=60, font=font_settings)
+                        text_color="#FFFFFF", width=200, height=50, font=font_settings)
 add_btn.grid(row=0, column=3, padx=10)
 
 # Scrollable Product List
