@@ -5,22 +5,27 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent.parent.parent
 DATA_DIR = os.path.join(BASE_DIR, "data")
 INVENTORY_FILE = os.path.join(DATA_DIR, "inventory.json")
+ASSETS_DIR = os.path.join(BASE_DIR, "src", "assets")
 
 # UI Settings
 APP_TITLE = "Inventory Management System"
-FONT_FAMILY = "Arial"
-FONT_SIZE = 24
-FONT_SETTINGS = (FONT_FAMILY, FONT_SIZE)
+APP_GEOMETRY = "1400x900"
+FONT_FAMILY = "Segoe UI"  # or "Arial" as fallback
 
 # Colors
 COLORS = {
-    "bg_light": "#FFFFFF",
-    "bg_dark": "#F0F0F0",
-    "text_primary": "#000000",
-    "button_primary": "#000000",
-    "button_danger": "#FF0000",
-    "button_text": "#FFFFFF"
+    "bg_primary": "#F5F7FA",
+    "bg_secondary": "#FFFFFF",
+    "bg_dark": "#2C3E50",
+    "text_primary": "#2C3E50",
+    "text_secondary": "#7F8C8D",
+    "text_light": "#FFFFFF",
+    "accent": "#3498DB",
+    "accent_hover": "#2980B9",
+    "success": "#27AE60",
+    "warning": "#F39C12",
+    "danger": "#E74C3C"
 }
 
-# Ensure data directory exists
+# Ensure directories exist
 os.makedirs(DATA_DIR, exist_ok=True)

@@ -16,12 +16,17 @@ class FileHandler:
             except json.JSONDecodeError:
                 messagebox.showerror("Error", "Inventory file is corrupted. Starting with empty inventory.")
                 return {}
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to load inventory: {str(e)}")
+                return {}
         return {}
     
     @staticmethod
     def save_inventory(file_path: str, data: Dict[str, Any]):
         """Save inventory data to JSON file"""
         try:
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, "w") as file:
                 json.dump(data, file, indent=4)
         except Exception as e:
