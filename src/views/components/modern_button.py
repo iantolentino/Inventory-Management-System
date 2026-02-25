@@ -11,15 +11,15 @@ class ModernButton(ctk.CTkButton):
         
         # Size configurations
         sizes = {
-            "sm": {"width": 80, "height": 32, "font": AppStyles.get_font(AppStyles.FONT_SM)},
-            "md": {"width": 120, "height": 40, "font": AppStyles.get_font(AppStyles.FONT_MD)},
-            "lg": {"width": 160, "height": 48, "font": AppStyles.get_font(AppStyles.FONT_LG)},
-            "xl": {"width": 200, "height": 56, "font": AppStyles.get_font(AppStyles.FONT_XL)}
+            "sm": {"width": 80, "height": 32, "font": ("Segoe UI", 12)},
+            "md": {"width": 120, "height": 40, "font": ("Segoe UI", 14)},
+            "lg": {"width": 160, "height": 48, "font": ("Segoe UI", 16)},
+            "xl": {"width": 200, "height": 56, "font": ("Segoe UI", 18)}
         }
         
         size_config = sizes.get(size, sizes["md"])
         
-        # Merge configurations, with kwargs taking precedence
+        # Base configuration
         button_config = {
             "text": text,
             "command": command,
@@ -34,21 +34,22 @@ class ModernButton(ctk.CTkButton):
             "border_color": style.get("border_color", None),
         }
         
-        # Update with any kwargs passed (these will override defaults)
+        # Remove None values
+        button_config = {k: v for k, v in button_config.items() if v is not None}
+        
+        # Update with any kwargs passed
         button_config.update(kwargs)
         
-        super().__init__(
-            parent,
-            **button_config
-        )
+        super().__init__(parent, **button_config)
         
-        self.bind("<Enter>", self._on_enter)
-        self.bind("<Leave>", self._on_leave)
+        # Store original methods
+        self._original_enter = None
+        self._original_leave = None
+        
+    def _on_enter(self, event=None):
+        """Handle mouse enter event - make event optional"""
+        pass
     
-    def _on_enter(self, event):
-        """Hover effect"""
-        self.configure( opacity=AppStyles.HOVER_ALPHA)
-    
-    def _on_leave(self, event):
-        """Remove hover effect"""
-        self.configure( opacity=1)
+    def _on_leave(self, event=None):
+        """Handle mouse leave event - make event optional"""
+        pass

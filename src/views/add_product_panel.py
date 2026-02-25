@@ -5,13 +5,13 @@ from src.views.components.modern_button import ModernButton
 from src.utils.validators import Validators
 
 class AddProductPanel(ctk.CTkFrame):
-    """Enhanced add product panel with modern design"""
+    """Compact add product panel"""
     
     def __init__(self, parent, controller, **kwargs):
         super().__init__(
             parent,
             fg_color=AppStyles.WHITE,
-            corner_radius=AppStyles.RADIUS_LG,
+            corner_radius=AppStyles.RADIUS_MD,
             **kwargs
         )
         
@@ -25,260 +25,273 @@ class AddProductPanel(ctk.CTkFrame):
         title = ctk.CTkLabel(
             self,
             text="Add New Product",
-            font=AppStyles.get_font(AppStyles.FONT_XL, "bold"),
+            font=("Segoe UI", 16, "bold"),
             text_color=AppStyles.DARK
         )
-        title.pack(anchor="w", padx=20, pady=(20, 10))
-        
-        # Subtitle
-        subtitle = ctk.CTkLabel(
-            self,
-            text="Fill in the product details below",
-            font=AppStyles.get_font(AppStyles.FONT_SM),
-            text_color=AppStyles.GRAY
-        )
-        subtitle.pack(anchor="w", padx=20, pady=(0, 20))
+        title.pack(anchor="w", padx=15, pady=(15, 5))
         
         # Form container
         form_frame = ctk.CTkFrame(self, fg_color="transparent")
-        form_frame.pack(fill="x", padx=20, pady=(0, 20))
-        
-        # Configure grid
-        form_frame.grid_columnconfigure(1, weight=1)
+        form_frame.pack(fill="x", padx=15, pady=(0, 15))
         
         # Product Name
-        ctk.CTkLabel(
-            form_frame,
+        name_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+        name_frame.pack(fill="x", pady=(0, 8))
+        
+        name_label = ctk.CTkLabel(
+            name_frame,
             text="Product Name *",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=0, column=0, padx=(0, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        name_label.pack(anchor="w")
         
         self.entry_name = ctk.CTkEntry(
-            form_frame,
+            name_frame,
             placeholder_text="Enter product name",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_name.grid(row=0, column=1, columnspan=3, pady=5, sticky="ew")
+        self.entry_name.pack(fill="x", pady=(2, 0))
+        
+        # Category and Value row
+        row1_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+        row1_frame.pack(fill="x", pady=(0, 8))
+        row1_frame.grid_columnconfigure(0, weight=1)
+        row1_frame.grid_columnconfigure(1, weight=1)
         
         # Category
-        ctk.CTkLabel(
-            form_frame,
+        cat_frame = ctk.CTkFrame(row1_frame, fg_color="transparent")
+        cat_frame.grid(row=0, column=0, sticky="ew", padx=(0, 5))
+        
+        cat_label = ctk.CTkLabel(
+            cat_frame,
             text="Category",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=1, column=0, padx=(0, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        cat_label.pack(anchor="w")
         
         self.entry_category = ctk.CTkEntry(
-            form_frame,
-            placeholder_text="e.g., Electronics, Clothing",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD
+            cat_frame,
+            placeholder_text="Category",
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_category.grid(row=1, column=1, columnspan=3, pady=5, sticky="ew")
+        self.entry_category.pack(fill="x", pady=(2, 0))
         
-        # Value and Quantity in same row
         # Value
-        ctk.CTkLabel(
-            form_frame,
+        val_frame = ctk.CTkFrame(row1_frame, fg_color="transparent")
+        val_frame.grid(row=0, column=1, sticky="ew", padx=(5, 0))
+        
+        val_label = ctk.CTkLabel(
+            val_frame,
             text="Value ($)",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=2, column=0, padx=(0, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        val_label.pack(anchor="w")
         
         self.entry_value = ctk.CTkEntry(
-            form_frame,
+            val_frame,
             placeholder_text="0.00",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD,
-            width=150
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_value.grid(row=2, column=1, pady=5, sticky="w")
+        self.entry_value.pack(fill="x", pady=(2, 0))
         
-        # Quantity
-        ctk.CTkLabel(
-            form_frame,
+        # Quantity row
+        row2_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+        row2_frame.pack(fill="x", pady=(0, 8))
+        
+        qty_label = ctk.CTkLabel(
+            row2_frame,
             text="Quantity *",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=2, column=2, padx=(20, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        qty_label.pack(anchor="w")
         
         self.entry_quantity = ctk.CTkEntry(
-            form_frame,
+            row2_frame,
             placeholder_text="0",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD,
-            width=150
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_quantity.grid(row=2, column=3, pady=5, sticky="w")
+        self.entry_quantity.pack(fill="x", pady=(2, 0))
         
-        # Stock Limits
+        # Stock Limits row
+        row3_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+        row3_frame.pack(fill="x", pady=(0, 8))
+        row3_frame.grid_columnconfigure(0, weight=1)
+        row3_frame.grid_columnconfigure(1, weight=1)
+        
         # Min Stock
-        ctk.CTkLabel(
-            form_frame,
+        min_frame = ctk.CTkFrame(row3_frame, fg_color="transparent")
+        min_frame.grid(row=0, column=0, sticky="ew", padx=(0, 5))
+        
+        min_label = ctk.CTkLabel(
+            min_frame,
             text="Min Stock",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=3, column=0, padx=(0, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        min_label.pack(anchor="w")
         
         self.entry_min_stock = ctk.CTkEntry(
-            form_frame,
+            min_frame,
             placeholder_text="Optional",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD,
-            width=150
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_min_stock.grid(row=3, column=1, pady=5, sticky="w")
+        self.entry_min_stock.pack(fill="x", pady=(2, 0))
         
         # Max Stock
-        ctk.CTkLabel(
-            form_frame,
+        max_frame = ctk.CTkFrame(row3_frame, fg_color="transparent")
+        max_frame.grid(row=0, column=1, sticky="ew", padx=(5, 0))
+        
+        max_label = ctk.CTkLabel(
+            max_frame,
             text="Max Stock",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=3, column=2, padx=(20, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        max_label.pack(anchor="w")
         
         self.entry_max_stock = ctk.CTkEntry(
-            form_frame,
+            max_frame,
             placeholder_text="Optional",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=40,
-            border_width=2,
-            border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD,
-            width=150
+            font=("Segoe UI", 13),
+            height=35,
+            border_width=1,
+            border_color=AppStyles.LIGHT
         )
-        self.entry_max_stock.grid(row=3, column=3, pady=5, sticky="w")
+        self.entry_max_stock.pack(fill="x", pady=(2, 0))
         
         # Description
-        ctk.CTkLabel(
+        desc_label = ctk.CTkLabel(
             form_frame,
             text="Description",
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            text_color=AppStyles.DARK
-        ).grid(row=4, column=0, padx=(0, 10), pady=5, sticky="w")
+            font=("Segoe UI", 12),
+            text_color=AppStyles.DARK,
+            anchor="w"
+        )
+        desc_label.pack(anchor="w")
         
         self.entry_description = ctk.CTkTextbox(
             form_frame,
-            font=AppStyles.get_font(AppStyles.FONT_MD),
-            height=100,
-            border_width=2,
+            font=("Segoe UI", 13),
+            height=60,
+            border_width=1,
             border_color=AppStyles.LIGHT,
-            corner_radius=AppStyles.RADIUS_MD,
             wrap="word"
         )
-        self.entry_description.grid(row=4, column=1, columnspan=3, pady=5, sticky="ew")
+        self.entry_description.pack(fill="x", pady=(2, 10))
         
         # Buttons
-        buttons_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
-        buttons_frame.grid(row=5, column=0, columnspan=4, pady=(20, 0))
+        button_frame = ctk.CTkFrame(form_frame, fg_color="transparent")
+        button_frame.pack(fill="x")
         
         self.add_button = ModernButton(
-            buttons_frame,
+            button_frame,
             text="Add Product",
             variant="success",
-            size="lg",
+            size="md",
             command=self._add_product
         )
-        self.add_button.pack(side="left", padx=5)
+        self.add_button.pack(side="left", padx=(0, 5), fill="x", expand=True)
         
         self.clear_button = ModernButton(
-            buttons_frame,
+            button_frame,
             text="Clear",
             variant="outline",
-            size="lg",
+            size="md",
             command=self._clear_form
         )
-        self.clear_button.pack(side="left", padx=5)
+        self.clear_button.pack(side="right", padx=(5, 0), fill="x", expand=True)
     
     def _add_product(self):
-        """Handle add product action with validation"""
-        # Validate product name
-        name_valid, name_error = self.validators.validate_product_name(self.entry_name.get())
-        if not name_valid:
-            messagebox.showwarning("Validation Error", name_error)
-            self.entry_name.focus()
-            return
-        
-        # Validate quantity
-        qty_valid, qty_error, quantity = self.validators.validate_quantity(self.entry_quantity.get())
-        if not qty_valid:
-            messagebox.showwarning("Validation Error", qty_error)
-            self.entry_quantity.focus()
-            return
-        
-        # Validate value
-        value_valid, value_error, value = self.validators.validate_value(self.entry_value.get())
-        if not value_valid:
-            messagebox.showwarning("Validation Error", value_error)
-            self.entry_value.focus()
-            return
-        
-        # Get category
-        category = self.entry_category.get().strip() or "Uncategorized"
-        category_valid, category_error = self.validators.validate_category(category)
-        if not category_valid:
-            messagebox.showwarning("Validation Error", category_error)
-            self.entry_category.focus()
-            return
-        
-        # Get description
-        description = self.entry_description.get("1.0", "end-1c").strip()
-        desc_valid, desc_error = self.validators.validate_description(description)
-        if not desc_valid:
-            messagebox.showwarning("Validation Error", desc_error)
-            self.entry_description.focus()
-            return
-        
-        # Get stock limits
-        min_stock = 0
-        if self.entry_min_stock.get().strip():
-            try:
-                min_stock = int(self.entry_min_stock.get())
-            except ValueError:
-                messagebox.showwarning("Validation Error", "Min stock must be a number")
+        """Handle add product action"""
+        try:
+            # Validate product name
+            name_valid, name_error = self.validators.validate_product_name(self.entry_name.get())
+            if not name_valid:
+                messagebox.showwarning("Validation Error", name_error)
+                self.entry_name.focus()
                 return
-        
-        max_stock = None
-        if self.entry_max_stock.get().strip():
-            try:
-                max_stock = int(self.entry_max_stock.get())
-            except ValueError:
-                messagebox.showwarning("Validation Error", "Max stock must be a number")
+            
+            # Validate quantity
+            qty_valid, qty_error, quantity = self.validators.validate_quantity(self.entry_quantity.get())
+            if not qty_valid:
+                messagebox.showwarning("Validation Error", qty_error)
+                self.entry_quantity.focus()
                 return
-        
-        # Add product
-        success = self.controller.add_product(
-            name=self.entry_name.get().strip(),
-            quantity=quantity,
-            value=value,
-            category=category,
-            description=description,
-            min_stock=min_stock,
-            max_stock=max_stock
-        )
-        
-        if success:
-            messagebox.showinfo("Success", f"Product '{self.entry_name.get()}' added successfully!")
-            self._clear_form()
-        else:
-            messagebox.showwarning("Error", "Product already exists or invalid input!")
+            
+            # Validate value
+            value_valid, value_error, value = self.validators.validate_value(self.entry_value.get())
+            if not value_valid:
+                messagebox.showwarning("Validation Error", value_error)
+                self.entry_value.focus()
+                return
+            
+            # Get category
+            category = self.entry_category.get().strip() or "Uncategorized"
+            
+            # Get description
+            description = self.entry_description.get("1.0", "end-1c").strip()
+            
+            # Get stock limits
+            min_stock = 0
+            if self.entry_min_stock.get().strip():
+                try:
+                    min_stock = int(self.entry_min_stock.get())
+                except ValueError:
+                    messagebox.showwarning("Validation Error", "Min stock must be a number")
+                    return
+            
+            max_stock = None
+            if self.entry_max_stock.get().strip():
+                try:
+                    max_stock = int(self.entry_max_stock.get())
+                except ValueError:
+                    messagebox.showwarning("Validation Error", "Max stock must be a number")
+                    return
+            
+            # Add product
+            success = self.controller.add_product(
+                name=self.entry_name.get().strip(),
+                quantity=quantity,
+                value=value,
+                category=category,
+                description=description,
+                min_stock=min_stock,
+                max_stock=max_stock
+            )
+            
+            if success:
+                messagebox.showinfo("Success", f"Product added successfully!")
+                self._clear_form()
+            else:
+                messagebox.showwarning("Error", "Product already exists!")
+                
+        except Exception as e:
+            messagebox.showerror("Error", f"An error occurred: {str(e)}")
     
     def _clear_form(self):
         """Clear all form fields"""
